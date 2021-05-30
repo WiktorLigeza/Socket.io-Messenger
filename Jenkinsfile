@@ -42,8 +42,26 @@ pipeline{
 				}
 			}
 		}
+		stage('Deploy') {
+			steps {
+				echo 'Deploy'
+				sh 'docker build -t deploy -f Dockerfile-deploy .'
+			}
+			post  {
+				always{
+					echo 'Finished'
+				}
+				failure{
+					messageFunction('DEPLOY', 'Failure')
+				}
+				success{
+					messageFunction('DEPLOY', 'Success')
+				}
+            		}
+		}
 	}
 }
+
 
 def messageFunction(stage, status) {
 	echo status
