@@ -44,8 +44,8 @@ pipeline{
 		}
 		stage('Deploy') {
 			steps {
-				echo 'Deploy'
-				sh 'docker build -t deploy -f Dockerfile-deploy .'
+				echo 'Deployment'
+				sh 'docker build -t deploy -f Dockerfile-Deploy .'
 			}
 			post  {
 				always{
